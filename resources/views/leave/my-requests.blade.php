@@ -1,16 +1,14 @@
-@extends('layouts.headerAndFot')
-@section('page_title')
-my-request
-@endsection
-@section('header_content')
-@section('main_content')
+@extends('layouts.admin')
+
+
+@section('content')
     
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl  sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <div class="container py-5">
+                    <div class="py-5">
                         <h3 class="mb-4">My Leave Requests</h3>
                         <table class="table table-bordered table-hover shadow-sm">
                             <thead class="table-primary">

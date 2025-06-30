@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard.blade.php',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -17,9 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 //employee
+Route::get('index', function(){
+return view('index');
+});
 Route::get('leave/create',[leaveRequestController::class,'create'])->name('create');
 Route::post('leave/store',[leaveRequestController::class,'store'])->name('store');
-Route::get('leave/my-Requests',[leaveRequestController::class,'myRequests'])->name('myRequests');
+Route::get('my-Requests',[leaveRequestController::class,'myRequests'])->name('myRequests');
 //admin
 Route::get('admin/request',[leaveRequestController::class,'index'])->name('index');
 Route::post( 'admin/approve/{id}',[leaveRequestController::class,'approve'])->name('approve');
