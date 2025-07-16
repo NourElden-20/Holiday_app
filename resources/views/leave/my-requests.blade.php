@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 
-@section('content')
+@section('main-content' )
     
 
-    <div class="py-12">
+    <div class="py-12 m-4">
         <div class="max-w-7xl  sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <div class="py-5">
-                        <h3 class="mb-4">My Leave Requests</h3>
+                        <h3 class="mb-4 m-2">My Leave Requests</h3>
                         <table class="table table-bordered table-hover shadow-sm">
                             <thead class="table-primary">
                                 <tr>

@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('content')
+@section('main-content')
 
 <!-- Page Heading -->
 
-
 <!-- Form Card -->
+ <div class="container">
 <span><h1>LEAVE REQUEST FORM</h1></span>
 <form action="{{ route('store') }}" method="POST">
     @csrf
@@ -27,6 +27,7 @@
 
     <button class="w-10 btn btn-primary" type="submit" class="btn btn-success btn-block">Submit Request</button>
 </form>
-@extends('layouts.admin')
+</div>
+
 
 @endsection

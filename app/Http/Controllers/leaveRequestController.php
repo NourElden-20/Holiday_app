@@ -34,6 +34,8 @@ class leaveRequestController extends Controller
         $user = auth()->user();
         $requests = $user->leaveRequests()->get();
         return view('leave.my-requests', compact('requests'));
+    dd(auth()->id());
+
     }
 
 
