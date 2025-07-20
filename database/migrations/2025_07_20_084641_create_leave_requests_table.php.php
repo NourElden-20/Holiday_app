@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('leave_requests', function (Blueprint $table) {
+        Schema::create('leave_requests', function (Blueprint $table) {
             $table-> id();
             $table-> foreignId('user_id')-> constrained()-> references('id')-> on('users'); 
             $table-> date('start_date');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-    Schema::dropIfExists('leave_requests');
+        Schema::dropIfExists('leave_requests');
     }
 };

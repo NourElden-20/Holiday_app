@@ -5,28 +5,31 @@
 <!-- Page Heading -->
 
 <!-- Form Card -->
- <div class="container">
-<span><h1>LEAVE REQUEST FORM</h1></span>
-<form action="{{ route('store') }}" method="POST">
-    @csrf
 
-    <div class="form-group">
-        <label for="start_date">Start Date</label>
-        <input type="date" name="start_date" class="form-control" required>
-    </div>
+<div class="container shadow-lg p-3 mb-5 bg-white rounded m-5">
+     <span>
+        <h1>LEAVE REQUEST FORM</h1>
+    </span>
+    <form action="{{ route('store') }}" method="POST"  class="row g-3">
+        @csrf
 
-    <div class="form-group">
-        <label for="end_date">End Date</label>
-        <input type="date" name="end_date" class="form-control" required>
-    </div>
+        <div class="form-group col-md-6">
+            <label for="start_date">Start Date</label>
+            <input type="date" name="start_date" class="form-control" required>
+        </div>
 
-    <div class="form-group">
-        <label for="reason">Reason</label>
-        <textarea name="reason" class="form-control" rows="4" required></textarea>
-    </div>
+        <div class="form-group col-md-6">
+            <label for="end_date">End Date</label>
+            <input type="date" name="end_date" class="form-control" required>
+        </div>
 
-    <button class="w-10 btn btn-primary" type="submit" class="btn btn-success btn-block">Submit Request</button>
-</form>
+        <div class="form-group  col-12">
+            <label for="reason">Reason</label>
+            <textarea name="reason" class="form-control" rows="4" required></textarea>
+        </div>
+
+        <button class="w-10 btn btn-primary" type="submit" class="btn btn-success btn-block">Submit Request</button>
+    </form>
 </div>
 
 

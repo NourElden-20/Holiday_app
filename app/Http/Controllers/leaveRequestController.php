@@ -24,7 +24,9 @@ class leaveRequestController extends Controller
 
 
         ]);
-        return redirect()->back()->with('success', 'your request has been submit');
+        // return view('leave.my-requests', compact('requests'));
+        return redirect()->route('myRequests')->with('success', 'your request has been submit');
+        // return view('leave/my-requests');
     }
 
 
@@ -34,7 +36,7 @@ class leaveRequestController extends Controller
         $user = auth()->user();
         $requests = $user->leaveRequests()->get();
         return view('leave.my-requests', compact('requests'));
-    dd(auth()->id());
+    // dd(auth()->id());
 
     }
 

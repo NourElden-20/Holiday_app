@@ -22,7 +22,7 @@ return view('index');
 });
 Route::get('leave/create',[leaveRequestController::class,'create'])->name('create');
 Route::post('leave/store',[leaveRequestController::class,'store'])->name('store');
-Route::get('my-Requests',[leaveRequestController::class,'myRequests'])->name('myRequests');
+Route::get('leave/my-Requests',[leaveRequestController::class,'myRequests'])->name('myRequests');
 //admin
 Route::get('admin/request',[leaveRequestController::class,'index'])->name('index');
 Route::post( 'admin/approve/{id}',[leaveRequestController::class,'approve'])->name('approve');
