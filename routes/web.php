@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard.blade.php',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,6 +27,9 @@ Route::get('leave/my-Requests',[leaveRequestController::class,'myRequests'])->na
 Route::get('admin/request',[leaveRequestController::class,'index'])->name('index');
 Route::post( 'admin/approve/{id}',[leaveRequestController::class,'approve'])->name('approve');
 Route::post( 'admin/reject/{id}',[leaveRequestController::class,'reject'])->name('reject');
+//edit and delete
+Route::get('edit/{id}',[leaveRequestController::class,'edit'])->name('edit');
+Route::put('leave/update/{id}', [leaveRequestController::class, 'update'])->name('update');
 
 
 

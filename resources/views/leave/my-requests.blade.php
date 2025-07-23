@@ -1,9 +1,5 @@
 @extends('layouts.admin')
-
-
-@section('main-content' )
-
-
+@section('main-content')
 <div class="py-12 m-4">
     <div class="max-w-7xl  sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -17,7 +13,7 @@
 
                     </div>
 
-                    
+
 
                     <table class="table table-bordered table-hover shadow-sm">
                         <thead class="table-primary">
@@ -28,6 +24,8 @@
                                 <th>Reason</th>
                                 <th>Status</th>
                                 <th>Submitted At</th>
+                                <th>Action</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -47,6 +45,13 @@
                                 </td>
 
                                 <td>{{ $req->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $req->action }}
+                                
+                                    <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="{{ route('edit',$req->id) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    
+                                </td>
+
                             </tr>
                             @empty
                             <tr>
