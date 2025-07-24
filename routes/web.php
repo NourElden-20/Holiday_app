@@ -30,6 +30,7 @@ Route::post( 'admin/reject/{id}',[leaveRequestController::class,'reject'])->name
 //edit and delete
 Route::get('edit/{id}',[leaveRequestController::class,'edit'])->name('edit');
 Route::put('leave/update/{id}', [leaveRequestController::class, 'update'])->name('update');
+Route::delete('/delete_request/{id}', [LeaveRequestController::class, 'destroy']);
 
 
 

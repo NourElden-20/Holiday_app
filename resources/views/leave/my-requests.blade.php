@@ -47,7 +47,9 @@
                                 <td>{{ $req->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $req->action }}
                                 
-                                    <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+<a href="#" onclick="event.preventDefault(); deleterequest({{ $req->id }})">
+    <i class="fa fa-trash" aria-hidden="true"></i>
+</a>
                                     <a href="{{ route('edit',$req->id) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     
                                 </td>
@@ -70,5 +72,34 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    function deleterequest(id) {
+        if (confirm("Are you sure to delete request?")) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: '/delete_request/' + id, 
+                type: 'DELETE',
+                success: function(result) {
+                    alert("Deleted successfully");
+                    location.reload(); // نحدث الصفحة بعد الحذف
+                },
+                error: function(xhr) {
+                    alert("Failed to delete request.");
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+    }
+</script>
+
 @endsection
 @section('footer_content')

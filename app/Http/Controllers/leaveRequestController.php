@@ -9,7 +9,7 @@ class leaveRequestController extends Controller
 {
     public function create()
     {
-        return view('leave.create',['request' => null]);
+        return view('leave.create', ['request' => null]);
     }
 
     public function store(Request $request)
@@ -73,15 +73,24 @@ class leaveRequestController extends Controller
 
 
     public function update(Request $request, $id)
-{
-    $leave = LeaveRequest::findOrFail($id);
-    $leave->update([
-        'reason' => $request->reason,
-        'start_date' => $request->start_date,
-        'end_date' => $request->end_date,
-    ]);
+    {
+        $leave = LeaveRequest::findOrFail($id);
+        $leave->update([
+            'reason' => $request->reason,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
 
-    return redirect()->route('myRequests')->with('success', 'Request updated successfully');
+        return redirect()->route('myRequests')->with('success', 'Request updated successfully');
+    }
+
+    public function destroy($id)
+{
+    $request = LeaveRequest::findOrFail($id);
+    $request->delete();
+    return response()->json(['success' => true]);
 }
 
+
+   
 }
