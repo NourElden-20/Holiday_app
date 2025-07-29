@@ -27,6 +27,8 @@ Route::get('leave/my-Requests',[leaveRequestController::class,'myRequests'])->na
 Route::get('admin/request',[leaveRequestController::class,'index'])->name('index');
 Route::post( 'admin/approve/{id}',[leaveRequestController::class,'approve'])->name('approve');
 Route::post( 'admin/reject/{id}',[leaveRequestController::class,'reject'])->name('reject');
+Route::get('createUser',[leaveRequestController::class,'createUser'])->name('createUser');
+Route::post('newUser',[leaveRequestController::class,'newUser'])->name('newUser');
 //edit and delete
 Route::get('edit/{id}',[leaveRequestController::class,'edit'])->name('edit');
 Route::put('leave/update/{id}', [leaveRequestController::class, 'update'])->name('update');

@@ -1,6 +1,5 @@
-@extends("layouts.admin")
-@section("main-content")
-
+@extends('layouts.admin')
+@section('main-content')
 <div class="py-10">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white p-4 shadow rounded-lg">

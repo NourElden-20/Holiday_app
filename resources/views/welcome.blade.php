@@ -39,12 +39,7 @@
                 </a>
             @endif
 
-            @if (Route::has('register'))
-                <a href="{{ route('register') }}"
-                   class="inline-block px-6 py-3 bg-green-500 text-white rounded-lg font-semibold shadow hover:bg-green-600 transition duration-200">
-                    📝 Register
-                </a>
-            @endif
+            
         </div>
     </div>
 

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head> @yield('header')
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+<head>
+    @yield('header')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-   
+
 
     <title>SB Admin 2 - Dashboard</title>
 
@@ -24,7 +26,11 @@
 
 </head>
 
+
+
+
 <body class="d-flex flex-column min-vh-100">
+
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -57,7 +63,7 @@
             </div>
             @if (Auth::user()->employee_type=="admin")
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="{{ route('index') }}" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-code-pull-request"></i>
                     <span>all request</span>
@@ -66,56 +72,78 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Your Request List</h6>
                         <a class="collapse-item" href="{{route('index')}}">All request</a>
-                        
+
                     </div>
                 </div>
             </li>
-            
-                
             @endif
 
-            
+            @if (Auth::user()->employee_type=="admin")
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fa-solid fa-code-pull-request"></i>
+                    <span>Create user</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('createUser')}}">Create new user</a>
+
+                    </div>
+                </div>
+            </li>
+            @endif
 
 
-            
+
+
+
 
 
             <!-- Nav Item - Pages Collapse Menu -->
-           <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRequests"
-        aria-expanded="true" aria-controls="collapseRequests">
-        <i class="fa-solid fa-code-pull-request"></i>
-        <span>Requests</span>
-    </a>
-    <div id="collapseRequests" class="collapse" aria-labelledby="headingRequests" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Your Request List</h6>
-            <a class="collapse-item" href="{{ route('myRequests') }}">Lists</a>
-        </div>
-    </div>
-</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRequests"
+                    aria-expanded="true" aria-controls="collapseRequests">
+                    <i class="fa-solid fa-code-pull-request"></i>
+                    <span>Requests</span>
+                </a>
+                <div id="collapseRequests" class="collapse" aria-labelledby="headingRequests" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Your Request List</h6>
+                        <a class="collapse-item" href="{{ route('myRequests') }}">Lists</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('create') }}">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Create Request</span>
+                </a>
+            </li>
+
 
 
             <!-- Nav Item - Pages Collapse Menu -->
-            
+
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            
+
 
             <!-- Nav Item - Pages Collapse Menu -->
-            
+
 
             <!-- Nav Item - Charts -->
-            
+
 
             <!-- Nav Item - Tables -->
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -123,7 +151,7 @@
             <!-- Sidebar Toggler (Sidebar) -->
 
             <div class="sidebar-card d-none d-lg-flex">
-                
+
                 <a class="btn btn-success btn-sm" href="{{Route("logout")}}">logout</a>
             </div>
 
@@ -132,15 +160,16 @@
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-            @yield("main-content")
+
 
             <!-- Main Content -->
-             @csrf
-
+            @csrf
+            @yield('main-content')
             <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white mt-auto ">
+                @yield('footer')
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto ">
                         <span>Copyright &copy; Your Website 2021</span>
@@ -177,5 +206,6 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 </body>
+
 
 </html>

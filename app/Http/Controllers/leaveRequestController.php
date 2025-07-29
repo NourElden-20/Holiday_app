@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class leaveRequestController extends Controller
 {
@@ -85,12 +86,30 @@ class leaveRequestController extends Controller
     }
 
     public function destroy($id)
-{
-    $request = LeaveRequest::findOrFail($id);
-    $request->delete();
-    return response()->json(['success' => true]);
-}
+    {
+        $request = LeaveRequest::findOrFail($id);
+        $request->delete();
+        return response()->json(['success' => true]);
+    }
 
-
-   
+    public function createUser()
+    {
+        return view('admin.createUser');
+    }
+    public function newUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'string |required',
+            'email' => 'string|required',
+            'password' => 'required',
+            'employee_type' => 'required',
+        ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'employee_type' => $request->employee_type,
+        ]);
+        return redirect()->route('createUser')->with('success', 'user created successfully');
+    }
 }
