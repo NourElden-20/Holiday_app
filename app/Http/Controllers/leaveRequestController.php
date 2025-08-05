@@ -99,13 +99,15 @@ class leaveRequestController extends Controller
     public function newUser(Request $request)
     {
         $request->validate([
-            'name' => 'string |required',
+            'first_name' => 'string |required',
+            'last_name' => 'string |required',
             'email' => 'string|required',
             'password' => 'required',
             'employee_type' => 'required',
         ]);
         $user = User::create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'employee_type' => $request->employee_type,

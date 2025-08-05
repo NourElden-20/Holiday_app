@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('leave_requests', function (Blueprint $table) {
-            $table-> id();
-            $table-> foreignId('user_id')-> constrained()-> references('id')-> on('users'); 
-            $table-> date('start_date');
-            $table-> date('end_date');
-            $table-> string('reason');
-            $table-> enum('status_request',['pending','approved','rejected'])->default('pending');
-            $table-> timestamps();
-            });
+            $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('reason');
+            $table->enum('status_request', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->timestamps();
+        });
     }
 
     /**
