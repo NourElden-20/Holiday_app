@@ -11,6 +11,7 @@
                 <thead class="table-dark text-center">
                     <tr>
                         <th>#</th>
+                         <th>ID</th>
                         <th>Employee</th>
                         <th>Start Date</th>
                         <th>End Date</th>
@@ -24,7 +25,8 @@
                     @forelse($requests as $req)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $req->user->name ?? 'Unknown' }}</td>
+                        <td>{{ $req->user->id }}</td>
+                        <td>{{ $req->user->first_name ?? 'Unknown' }}</td>
                         <td>{{ $req->start_date }}</td>
                         <td>{{ $req->end_date }}</td>
                         <td>{{ $req->reason }}</td>
