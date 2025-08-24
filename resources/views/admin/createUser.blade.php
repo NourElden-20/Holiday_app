@@ -9,10 +9,17 @@
     </div>
 @endif
 
-        <h3 class="text-center mb-4">Create New User</h3>
+        <h3 class=" mb-4"> New User</h3>
 
         <form method="POST" action="{{ route('newUser') }}" class="row g-3">
             @csrf
+
+           <div class="form-group col-md-6">
+    <label for="user_id">User ID</label>
+    <input type="text" name="user_id" id="user_id" class="form-control" required>
+</div>
+
+
 
             <div class="form-group col-md-6">
                 <label for="name" class="form-label fw-bold">First name</label>

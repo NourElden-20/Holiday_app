@@ -6,11 +6,13 @@
             <div class="p-6">
                 <div class="py-5 m-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">My Leave Requests</h1>
-                        <a href="{{Route("create")}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Create request</a>
+                        <h1 class="h3 mb-0 text-gray-800">Requests</h1>
+                        <div>
+                            <a href="{{Route("create")}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                    class="fas fa-plus fa-sm text-white-50"></i> Create request</a>
 
-
+                            
+                        </div>
                     </div>
 
 
@@ -24,7 +26,7 @@
                                 <th>Reason</th>
                                 <th>Status</th>
                                 <th>Submitted At</th>
-                                <th>Action</th>
+                                <th>  </th>
 
                             </tr>
                         </thead>
@@ -46,12 +48,12 @@
 
                                 <td>{{ $req->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $req->action }}
-                                
-<a href="#" onclick="event.preventDefault(); deleterequest({{ $req->id }})">
-    <i class="fa fa-trash" aria-hidden="true"></i>
-</a>
+
+                                    <a href="#" onclick="event.preventDefault(); deleterequest({{ $req->id }})">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
                                     <a href="{{ route('edit',$req->id) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    
+
                                 </td>
 
                             </tr>
@@ -86,7 +88,7 @@
             });
 
             $.ajax({
-                url: '/delete_request/' + id, 
+                url: '/delete_request/' + id,
                 type: 'DELETE',
                 success: function(result) {
                     alert("Deleted successfully");

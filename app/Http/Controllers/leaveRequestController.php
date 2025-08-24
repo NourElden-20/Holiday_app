@@ -92,6 +92,16 @@ class leaveRequestController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function showRequestDetails(Request $httpRequest, $id)
+{ 
+    $leaveRequest = $httpRequest->user()->leaveRequests()->findOrFail($id);
+    return view('admin.showRequestDetails', compact('leaveRequest'));
+}
+
+    // public function show(Request $request,$id){
+    //     $request = LeaveRequest::findOrFail($id);
+    // }
+
     public function createUser()
     {
         return view('admin.createUser');
@@ -106,6 +116,7 @@ class leaveRequestController extends Controller
             'employee_type' => 'required',
         ]);
         $user = User::create([
+            'user_id' => $request->user_id,   // 👈 كدا يتحفظ من الفورم
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,

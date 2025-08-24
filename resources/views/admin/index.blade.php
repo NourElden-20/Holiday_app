@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('header')
 @section('main-content')
 <div class="py-10">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -11,20 +12,20 @@
                 <thead class="table-dark text-center">
                     <tr>
                         <th>#</th>
-                         <th>ID</th>
+                        <th>ID</th>
                         <th>Employee</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Reason</th>
                         <th>Status</th>
-                        <th>Submitted At</th>
-                        <th>Actions</th>
+                        <th> <th></th></th>
+                        
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     @forelse($requests as $req)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                       <td><a href="{{route('showRequestDetails',['id' => $req->id])}}">{{ $loop->iteration }}</a></td>
                         <td>{{ $req->user->id }}</td>
                         <td>{{ $req->user->first_name ?? 'Unknown' }}</td>
                         <td>{{ $req->start_date }}</td>
@@ -38,8 +39,8 @@
                                 {{ ucfirst($req->status) }}
                             </span>
                         </td>
-                        <td>{{ $req->created_at->format('d-m-Y') }}</td>
-                        <td>
+                       
+                        <!-- <td>
                             @if($req->status_request == 'pending')
                             <form action="{{ route('approve', $req->id) }}" method="POST" class="d-inline">
                                 @csrf
@@ -52,7 +53,7 @@
                             @else
                             <span class="text-muted">No Actions</span>
                             @endif
-                        </td>
+                        </td> -->
                     </tr>
                     @empty
                     <tr>

@@ -41,7 +41,7 @@
 
             
         </div>
-        <div class="flex flex-col md:flex-row justify-center gap-4">
+        <!-- <div class="flex flex-col md:flex-row justify-center gap-4">
             @if (Route::has('register'))
                 <a href="{{ route('register') }}"
                    class="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold shadow hover:bg-indigo-700 transition duration-200">
@@ -50,7 +50,7 @@
             @endif
 
             
-        </div>
+        </div> -->
     </div>
 
 </body>

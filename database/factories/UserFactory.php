@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'password' => bcrypt('password'), // أو Hash::make()
             'employee_type' => 'employee', // أو اعملها random لو حابب
             'remember_token' => Str::random(10),
+            'user_id' => $this->faker->unique()->numberBetween(1, 1000), // أو أي قيمة منطقية أخرى
         ];
     }
 

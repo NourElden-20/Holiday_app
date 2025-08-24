@@ -22,11 +22,13 @@ return view('index');
 });
 Route::get('leave/create',[leaveRequestController::class,'create'])->name('create');
 Route::post('leave/store',[leaveRequestController::class,'store'])->name('store');
-Route::get('leave/my-Requests',[leaveRequestController::class,'myRequests'])->name('myRequests');
+Route::get('leave/Requests',[leaveRequestController::class,'myRequests'])->name('myRequests');
+Route::get('profile',[ProfileController::class,'edit'])->name('profile');
 //admin
 Route::get('admin/request',[leaveRequestController::class,'index'])->name('index');
 Route::post( 'admin/approve/{id}',[leaveRequestController::class,'approve'])->name('approve');
 Route::post( 'admin/reject/{id}',[leaveRequestController::class,'reject'])->name('reject');
+Route::get('view/{id}',[leaveRequestController::class,'showRequestDetails'])->name('showRequestDetails');
 Route::get('createUser',[leaveRequestController::class,'createUser'])->name('createUser');
 Route::post('newUser',[leaveRequestController::class,'newUser'])->name('newUser');
 //edit and delete
