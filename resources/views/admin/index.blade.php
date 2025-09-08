@@ -40,7 +40,7 @@
                             </span>
                         </td>
                        
-                        <!-- <td>
+                        <td>
                             @if($req->status_request == 'pending')
                             <form action="{{ route('approve', $req->id) }}" method="POST" class="d-inline">
                                 @csrf
@@ -53,7 +53,7 @@
                             @else
                             <span class="text-muted">No Actions</span>
                             @endif
-                        </td> -->
+                        </td>
                     </tr>
                     @empty
                     <tr>

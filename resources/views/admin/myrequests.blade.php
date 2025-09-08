@@ -1,5 +1,5 @@
-@extends('layouts.employee')
-@section('content')
+@extends('layouts.admin')
+@section('main-content')
 <div class="py-12 m-4">
     <div class="max-w-7xl  sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -10,8 +10,6 @@
                         <div>
                             <a href="{{Route("create")}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                     class="fas fa-plus fa-sm text-white-50"></i> Create request</a>
-
-                            
                         </div>
                     </div>
 
@@ -26,7 +24,7 @@
                                 <th>Reason</th>
                                 <th>Status</th>
                                 <th>Submitted At</th>
-                                <th>  </th>
+                                <th> </th>
 
                             </tr>
                         </thead>

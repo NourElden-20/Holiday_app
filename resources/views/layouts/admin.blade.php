@@ -37,7 +37,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route("dashboard") }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route("index") }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -49,7 +49,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{route("dashboard")}}">
+                <a class="nav-link" href="{{route("index")}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -61,7 +61,7 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-            @if (Auth::user()->employee_type=="admin")
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('index') }}" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -76,9 +76,8 @@
                     </div>
                 </div>
             </li>
-            @endif
 
-            @if (Auth::user()->employee_type=="admin")
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapseThree">
@@ -92,7 +91,7 @@
                     </div>
                 </div>
             </li>
-            @endif
+
 
 
 
@@ -110,12 +109,19 @@
                 <div id="collapseRequests" class="collapse" aria-labelledby="headingRequests" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Your Request List</h6>
-                        <a class="collapse-item" href="{{ route('myRequests') }}">Lists</a>
+                        <a class="collapse-item" href="{{ route('adminRequests') }}">Lists</a>
                     </div>
                 </div>
             </li>
 
-            
+            <li class="nav-item mt-3">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="nav-link text-white border-0 bg-transparent">
+                        <i class="fa fa-right-from-bracket me-2"></i> Logout
+                    </button>
+                </form>
+            </li>
 
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -140,11 +146,11 @@
 
 
             <!-- Divider -->
-       
+
 
             <!-- Sidebar Toggler (Sidebar) -->
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->

@@ -1,5 +1,5 @@
-@extends('layouts.admin')
-    @section('main-content')
+@extends('layouts.employee')
+    @section('content')
         
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

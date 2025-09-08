@@ -1,41 +1,48 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\leaveRequestController;
+use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\ProfileController;
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard',[DashboardController::class,'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-//employee
-Route::get('index', function(){
-return view('index');
-});
-Route::get('leave/create',[leaveRequestController::class,'create'])->name('create');
-Route::post('leave/store',[leaveRequestController::class,'store'])->name('store');
-Route::get('leave/Requests',[leaveRequestController::class,'myRequests'])->name('myRequests');
-Route::get('profile',[ProfileController::class,'edit'])->name('profile');
-//admin
-Route::get('admin/request',[leaveRequestController::class,'index'])->name('index');
-Route::post( 'admin/approve/{id}',[leaveRequestController::class,'approve'])->name('approve');
-Route::post( 'admin/reject/{id}',[leaveRequestController::class,'reject'])->name('reject');
-Route::get('view/{id}',[leaveRequestController::class,'showRequestDetails'])->name('showRequestDetails');
-Route::get('createUser',[leaveRequestController::class,'createUser'])->name('createUser');
-Route::post('newUser',[leaveRequestController::class,'newUser'])->name('newUser');
-//edit and delete
-Route::get('edit/{id}',[leaveRequestController::class,'edit'])->name('edit');
-Route::put('leave/update/{id}', [leaveRequestController::class, 'update'])->name('update');
-Route::delete('/delete_request/{id}', [LeaveRequestController::class, 'destroy']);
+
+    // Employee Routes
+  Route::get('employee/dashboard', [DashboardController::class,'index'])->name('employeeDashboard');
+    Route::get('leave/create',[LeaveRequestController::class,'create'])->name('create');
+    Route::post('leave/store',[LeaveRequestController::class,'store'])->name('store');
+    Route::get('employee/leave/requests',[LeaveRequestController::class,'myRequests'])->name('myRequests');
 
 
+    // Admin Routes (محمي بالـ Middleware isAdmin)
+     Route::middleware(['isAdmin'])->group(function () {
+        Route::get('admin/dashboard',[DashboardController::class,'index'])->name('index'); // خليه للأدمن
+        Route::get('admin/requests',[LeaveRequestController::class,'adminRequests'])->name('adminRequests');
+        Route::post('admin/approve/{id}',[LeaveRequestController::class,'approve'])->name('approve');
+        Route::post('admin/reject/{id}',[LeaveRequestController::class,'reject'])->name('reject');
+        Route::get('admin/view/{id}',[LeaveRequestController::class,'showRequestDetails'])->name('showRequestDetails');
+        Route::get('admin/createUser',[LeaveRequestController::class,'createUser'])->name('createUser');
+        Route::post('admin/newUser',[LeaveRequestController::class,'newUser'])->name('newUser');
+    });
+
+
+    // Edit and delete
+    Route::get('edit/{id}',[LeaveRequestController::class,'edit'])->name('edit');
+    Route::put('leave/update/{id}', [LeaveRequestController::class, 'update'])->name('update');
+    Route::delete('/delete_request/{id}', [LeaveRequestController::class, 'destroy'])->name('delete');
+});
 
 require __DIR__.'/auth.php';

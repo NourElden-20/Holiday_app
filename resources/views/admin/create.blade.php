@@ -1,6 +1,6 @@
-@extends('layouts.employee')
+@extends('layouts.admin')
 
-@section('content')
+@section('main-content')
 
 <div class=" shadow-lg p-3 mb-5 bg-white rounded m-2 ">
     <span>

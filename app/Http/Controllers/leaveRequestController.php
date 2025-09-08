@@ -10,25 +10,36 @@ class leaveRequestController extends Controller
 {
     public function create()
     {
+        $user = auth()->user();
+        if ($user->employee_type === 'admin') {
+            return view('admin.create', ['request' => null]);
+        }
         return view('leave.create', ['request' => null]);
     }
 
     public function store(Request $request)
     {
         LeaveRequest::create([
-            'user_id' => auth()->id(),
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'reason' => $request->reason,
+            'user_id'       => auth()->id(),
+            'start_date'    => $request->start_date,
+            'end_date'      => $request->end_date,
+            'reason'        => $request->reason,
             'status_request' => 'pending',
-
-
-
         ]);
-        // return view('leave.my-requests', compact('requests'));
-        return redirect()->route('myRequests')->with('success', 'your request has been submit');
-        // return view('leave/my-requests');
+
+        $user = auth()->user();
+
+        if ($user->employee_type === 'admin') {
+            // أدمن → يروح على البليد الخاص بالأدمن
+            return redirect()->route('adminRequests')
+                ->with('success', 'Your request has been submitted (Admin View).');
+        }
+
+        // موظف عادي → يروح على بليد الموظف
+        return redirect()->route('myRequests')
+            ->with('success', 'Your request has been submitted (Employee View).');
     }
+
 
 
 
@@ -37,6 +48,14 @@ class leaveRequestController extends Controller
         $user = auth()->user();
         $requests = $user->leaveRequests()->get();
         return view('leave.my-requests', compact('requests'));
+        // dd(auth()->id());
+
+    }
+    public function adminRequests()
+    {
+        $user = auth()->user();
+        $requests = $user->leaveRequests()->get();
+        return view('admin.myrequests', compact('requests'));
         // dd(auth()->id());
 
     }
@@ -93,10 +112,10 @@ class leaveRequestController extends Controller
     }
 
     public function showRequestDetails(Request $httpRequest, $id)
-{ 
-    $leaveRequest = $httpRequest->user()->leaveRequests()->findOrFail($id);
-    return view('admin.showRequestDetails', compact('leaveRequest'));
-}
+    {
+        $leaveRequest = $httpRequest->user()->leaveRequests()->findOrFail($id);
+        return view('admin.showRequestDetails', compact('leaveRequest'));
+    }
 
     // public function show(Request $request,$id){
     //     $request = LeaveRequest::findOrFail($id);
@@ -116,7 +135,7 @@ class leaveRequestController extends Controller
             'employee_type' => 'required',
         ]);
         $user = User::create([
-            'user_id' => $request->user_id,   // 👈 كدا يتحفظ من الفورم
+            'user_id' => $request->user_id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,

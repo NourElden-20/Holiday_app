@@ -55,4 +55,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function isAdmin(){
+        return $this->employee_type==="admin";
+    }
 }

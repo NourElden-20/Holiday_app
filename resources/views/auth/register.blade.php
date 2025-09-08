@@ -1,12 +1,23 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
        @csrf
+       <div>
+            <x-input-label for="user_id" :value="__('user_id')" />
+            <x-text-input id="user_id" class="block mt-1 w-full" type="number" name="user_id" :value="old('user_id')" required autofocus autocomplete="user_id" />
+            <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
+        </div>
 
-        <!-- Name -->
+        <!-- firstName -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="first_name" :value="__('first_name')" />
+            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="first_name" />
+            <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+        </div>
+        <!-- lastName -->
+        <div>
+            <x-input-label for="last_name" :value="__('last_name')" />
+            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
+            <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
