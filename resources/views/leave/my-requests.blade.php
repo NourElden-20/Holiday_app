@@ -1,5 +1,9 @@
 @extends('layouts.employee')
-@section('content')
+@section('head')
+<title>My Leave Requests</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+@section('main-content')
 <div class="py-12 m-4">
     <div class="max-w-7xl  sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -11,7 +15,7 @@
                             <a href="{{Route("create")}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                     class="fas fa-plus fa-sm text-white-50"></i> Create request</a>
 
-                            
+
                         </div>
                     </div>
 
@@ -20,13 +24,16 @@
                     <table class="table table-bordered table-hover shadow-sm">
                         <thead class="table-primary">
                             <tr>
-                                <th>#</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
+                                <th></th>
+                                <th>Title</th>
                                 <th>Reason</th>
                                 <th>Status</th>
                                 <th>Submitted At</th>
-                                <th>  </th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+
+
+                                <th> </th>
 
                             </tr>
                         </thead>
@@ -34,9 +41,7 @@
                             @forelse($requests as $req)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $req->start_date }}</td>
-                                <td>{{ $req->end_date }}</td>
-                                <td>{{ $req->reason }}</td>
+                                <td>{{ $req->title }}</td>
                                 <td>
                                     <span class="badge 
         @if($req->status_request == 'approved') bg-success
@@ -45,11 +50,16 @@
                                         {{ ucfirst($req->status_request) }}
                                     </span>
                                 </td>
+                                <td>{{ $req->created_at }}</td>
+                                <td>{{ $req->start_date }}</td>
+                                <td>{{ $req->end_date }}</td>
+                                <!-- <td>{{ $req->reason }}</td> -->
+
 
                                 <td>{{ $req->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $req->action }}
 
-                                    <a href="#" onclick="event.preventDefault(); deleterequest({{ $req->id }})">
+                                    <a href="{{ route('delete',$req->id) }}" onclick="event.preventDefault(); deleterequest({{ $req->id }})">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                     <a href="{{ route('edit',$req->id) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
@@ -74,8 +84,7 @@
         </div>
     </div>
 </div>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
@@ -92,7 +101,7 @@
                 type: 'DELETE',
                 success: function(result) {
                     alert("Deleted successfully");
-                    location.reload(); // نحدث الصفحة بعد الحذف
+                    location.reload();
                 },
                 error: function(xhr) {
                     alert("Failed to delete request.");
@@ -102,6 +111,7 @@
         }
     }
 </script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 @endsection
 @section('footer_content')

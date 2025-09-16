@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::get('admin/view/{id}',[LeaveRequestController::class,'showRequestDetails'])->name('showRequestDetails');
         Route::get('admin/createUser',[LeaveRequestController::class,'createUser'])->name('createUser');
         Route::post('admin/newUser',[LeaveRequestController::class,'newUser'])->name('newUser');
+        Route::get('admin/showUsers',[LeaveRequestController::class,'showUsers'])->name('admin.users');
     });
 
 

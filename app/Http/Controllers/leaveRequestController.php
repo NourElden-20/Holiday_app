@@ -23,6 +23,7 @@ class leaveRequestController extends Controller
             'user_id'       => auth()->id(),
             'start_date'    => $request->start_date,
             'end_date'      => $request->end_date,
+            'title'         => $request->title,
             'reason'        => $request->reason,
             'status_request' => 'pending',
         ]);
@@ -113,8 +114,9 @@ class leaveRequestController extends Controller
 
     public function showRequestDetails(Request $httpRequest, $id)
     {
-        $leaveRequest = $httpRequest->user()->leaveRequests()->findOrFail($id);
+        $leaveRequest = LeaveRequest::with('user')->findOrFail($id);
         return view('admin.showRequestDetails', compact('leaveRequest'));
+    
     }
 
     // public function show(Request $request,$id){
@@ -143,5 +145,10 @@ class leaveRequestController extends Controller
             'employee_type' => $request->employee_type,
         ]);
         return redirect()->route('createUser')->with('success', 'user created successfully');
+    }
+
+    public function showUsers(){
+        $users=User::all();
+        return view('admin.showUsers',compact('users'));
     }
 }

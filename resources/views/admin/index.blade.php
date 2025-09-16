@@ -11,21 +11,21 @@
             <table class="table table-bordered table-hover align-middle">
                 <thead class="table-dark text-center">
                     <tr>
-                        <th>#</th>
-                        <th>ID</th>
+                        <th></th>
+                        <th>Employee_id</th>
                         <th>Employee</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Reason</th>
                         <th>Status</th>
-                        <th> <th></th></th>
-                        
+
+
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     @forelse($requests as $req)
                     <tr>
-                       <td><a href="{{route('showRequestDetails',['id' => $req->id])}}">{{ $loop->iteration }}</a></td>
+                        <td><a href="{{route('showRequestDetails',['id' => $req->id])}}">{{ $loop->iteration }}</a></td>
                         <td>{{ $req->user->id }}</td>
                         <td>{{ $req->user->first_name ?? 'Unknown' }}</td>
                         <td>{{ $req->start_date }}</td>
@@ -33,27 +33,15 @@
                         <td>{{ $req->reason }}</td>
                         <td>
                             <span class="badge 
-                                        @if($req->status == 'approved') bg-success
-                                        @elseif($req->status == 'rejected') bg-danger
+                                        @if($req->status_request == 'approved') bg-success
+                                        @elseif($req->status_request == 'rejected') bg-danger
                                         @else bg-warning text-dark @endif">
-                                {{ ucfirst($req->status) }}
+                                {{ ucfirst($req->status_request) }}
+                                
                             </span>
                         </td>
-                       
-                        <td>
-                            @if($req->status_request == 'pending')
-                            <form action="{{ route('approve', $req->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-success btn-sm">✔ Accept</button>
-                            </form>
-                            <form action="{{ route('reject', $req->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-sm">✘ Reject</button>
-                            </form>
-                            @else
-                            <span class="text-muted">No Actions</span>
-                            @endif
-                        </td>
+
+
                     </tr>
                     @empty
                     <tr>

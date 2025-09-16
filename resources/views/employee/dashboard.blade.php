@@ -1,39 +1,13 @@
 {{-- resources/views/employee/dashboard.blade.php --}}
 @extends('layouts.employee')
 
-@section('content')
+@section('main-content')
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>👨‍💼 Employee Dashboard</h2>
 
     <!-- Profile Dropdown -->
-    <div class="dropdown text-end">
-        <a href="#" class="d-block text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-            @if(Auth::user()->profile_image ?? false)
-                <!-- لو عنده صورة محفوظة -->
-                <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
-                     alt="profile" class="rounded-circle" width="40" height="40">
-            @else
-                <!-- Avatar ديناميكي -->
-                <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" 
-                     style="width:40px; height:40px; font-weight:bold;">
-                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                </div>
-            @endif
-        </a>
-
-        <ul class="dropdown-menu dropdown-menu-end text-small" aria-labelledby="dropdownUser">
-            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-            <li><a class="dropdown-item" href="{{ route('profile.update') }}">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="dropdown-item">Logout</button>
-                </form>
-            </li>
-        </ul>
-    </div>
+    
 </div>
 
     <div class="row">
@@ -140,7 +114,8 @@
         }
     });
 </script>
-
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+F
 <!-- Bootstrap JS (includes Popper) -->
 
 
