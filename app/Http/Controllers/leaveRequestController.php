@@ -31,12 +31,10 @@ class leaveRequestController extends Controller
         $user = auth()->user();
 
         if ($user->employee_type === 'admin') {
-            // أدمن → يروح على البليد الخاص بالأدمن
             return redirect()->route('adminRequests')
                 ->with('success', 'Your request has been submitted (Admin View).');
         }
 
-        // موظف عادي → يروح على بليد الموظف
         return redirect()->route('myRequests')
             ->with('success', 'Your request has been submitted (Employee View).');
     }
@@ -52,14 +50,14 @@ class leaveRequestController extends Controller
         // dd(auth()->id());
 
     }
-    public function adminRequests()
-    {
-        $user = auth()->user();
-        $requests = $user->leaveRequests()->get();
-        return view('admin.myrequests', compact('requests'));
-        // dd(auth()->id());
+    // public function adminRequests()
+    // {
+    //     $user = auth()->user();
+    //     $requests = $user->leaveRequests()->get();
+    //     return view('admin.myrequests', compact('requests'));
+    //     // dd(auth()->id());
 
-    }
+    // }
 
 
     public function index()
@@ -67,6 +65,7 @@ class leaveRequestController extends Controller
         $requests = LeaveRequest::with('user')->latest()->get();
         return view('admin.index', compact('requests'));
     }
+    
     public function approve($id)
     {
         $request = LeaveRequest::findOrFail($id);

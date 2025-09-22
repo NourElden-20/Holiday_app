@@ -45,25 +45,41 @@
 
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 <script>
-  tinymce.init({
-    selector: '#mytextarea',
-    forced_root_block: false,
-    statusbar: false,
-    force_br_newlines: true,
-    remove_linebreaks: false,
-    convert_newlines_to_brs: true,
-    license_key: 'gpl',
-    height: 300,
-    menubar: false,
-    branding: false,
-    plugins: 'lists link image preview',
-    toolbar: 'undo redo | bold italic underline | bullist numlist | link image preview',
-    setup: function(editor) {
-      editor.on('change', function() {
-        editor.save();
-      });
-    }
-  });
+ tinymce.init({     
+  selector: '#mytextarea',
+  plugins: 'lists link image preview',     
+  toolbar: 'undo redo | bold italic underline | bullist numlist | link image preview',
+  height: 300,     
+  menubar: false,     
+  statusbar: false,
+  branding: false,
+  license_key: 'gpl',
+  
+  // إعدادات قوية لمنع P tags
+  forced_root_block: false,
+  force_br_newlines: true,
+  force_p_newlines: false,
+  convert_newlines_to_brs: true,
+  remove_trailing_brs: false,
+  
+  setup: function(editor) {
+    editor.on('BeforeSetContent', function(e) {
+      e.content = e.content.replace(/<p>/g, '').replace(/<\/p>/g, '');
+    });
+    
+    editor.on('GetContent', function(e) {
+      e.content = e.content.replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<p[^>]*>/g, '');
+    });
+    
+    editor.on('SaveContent', function(e) {
+      e.content = e.content.replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<p[^>]*>/g, '');
+    });
+    
+    editor.on('change', function() {         
+      editor.save();       
+    }); 
+  }
+});
 </script>
 
 

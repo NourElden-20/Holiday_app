@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     // Admin Routes (محمي بالـ Middleware isAdmin)
      Route::middleware(['isAdmin'])->group(function () {
         Route::get('admin/dashboard',[DashboardController::class,'index'])->name('index'); // خليه للأدمن
-        Route::get('admin/requests',[LeaveRequestController::class,'adminRequests'])->name('adminRequests');
+        Route::get('admin/requests',[LeaveRequestController::class,'index'])->name('adminRequests');
         Route::post('admin/approve/{id}',[LeaveRequestController::class,'approve'])->name('approve');
         Route::post('admin/reject/{id}',[LeaveRequestController::class,'reject'])->name('reject');
         Route::get('admin/view/{id}',[LeaveRequestController::class,'showRequestDetails'])->name('showRequestDetails');
